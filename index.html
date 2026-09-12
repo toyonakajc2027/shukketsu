@@ -894,14 +894,8 @@
     sel.onchange = draw;
   }
   function adminTools(body) {
-    body.innerHTML = '<div class="card"><div class="eyebrow">名簿</div><div class="caption" style="margin-top:4px">総務のマスターシート（２０２６年度出欠・各種確認表）の「マスター」タブから名簿を作り直します。回答の記録は消えません。</div>' +
-      '<div style="margin-top:12px"><button class="btn quiet" id="syncGo">名簿を更新する</button></div><div id="syncRes" style="margin-top:8px;font-size:13px"></div></div>' +
-      '<div class="card" style="margin-top:10px"><div class="eyebrow">配布用リンク</div><div class="caption" style="margin-top:4px">LINEグループに貼る共通リンクです。</div><pre class="preview" style="font-size:12px;word-break:break-all">' + esc(S.appUrl) + '</pre><div style="margin-top:10px"><button class="btn quiet small" id="copyApp">コピー</button></div></div>';
-    document.getElementById('syncGo').onclick = function () {
-      var b = this; b.disabled = true;
-      call('syncRoster', S.pass).then(function (r) { document.getElementById('syncRes').innerHTML = '<span class="ok-msg">' + r.count + '名で更新しました</span>'; b.disabled = false; return load(); })
-        .catch(function (e) { b.disabled = false; document.getElementById('syncRes').innerHTML = '<span class="err">' + esc(e.message) + '</span>'; });
-    };
+    body.innerHTML = '<div class="card"><div class="eyebrow">配布用リンク</div><div class="caption" style="margin-top:4px">LINEグループに貼る共通リンクです。</div><pre class="preview" style="font-size:12px;word-break:break-all">' + esc(S.appUrl) + '</pre><div style="margin-top:10px"><button class="btn quiet small" id="copyApp">コピー</button></div></div>' +
+      '<div class="card" style="margin-top:10px"><div class="eyebrow">名簿の直し方</div><div class="caption" style="margin-top:4px">入会・卒業の反映は専務が行います（DBシートの「名簿」を直接直すか、GASエディタで syncMembersFromMaster を実行）。この画面からは変更できません。</div></div>';
     document.getElementById('copyApp').onclick = function () { copyText(S.appUrl).then(function () { toast('コピーしました'); }); };
   }
 
