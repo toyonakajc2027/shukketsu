@@ -461,6 +461,7 @@
       (S.me ? '<a href="#" data-go="person">' + esc(S.me.replace(/ /g, '')) + ' さんの出席記録</a>' : '') +
       (S.role === 'admin' ? '<a href="#" data-go="admin">役員メニュー</a>' : '') +
       '<a href="#" id="myLink">自分専用リンク</a>' +
+      '<a href="#" id="logout" style="color:var(--hint)">ログアウト</a>' +
       '</div></div>';
     app.innerHTML = h;
     bindNav();
@@ -470,6 +471,14 @@
     }
     var ml = document.getElementById('myLink');
     if (ml) ml.onclick = function (e) { e.preventDefault(); showMyLink(); };
+    var lo = document.getElementById('logout');
+    if (lo) lo.onclick = function (e) {
+      e.preventDefault();
+      if (!confirm('この端末の記憶（合言葉と名前）を消して、最初の画面に戻ります。よろしいですか？')) return;
+      store.del(K_PASS); store.del(K_ME); store.del(K_ROLE);
+      S.pass = ''; S.me = ''; S.role = '';
+      render({ view: 'gate' }, false);
+    };
   }
 
   function topBar() {
