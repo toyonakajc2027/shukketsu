@@ -806,7 +806,7 @@
   // ── 役員
   function viewAdmin(tab) {
     if (S.role !== 'admin') { toast('役員用の合言葉で入り直してください'); return viewHome(); }
-    var tabs = [['summary', '集計'], ['add', '登録'], ['bulk', '一括'], ['remind', 'リマインド'], ['tools', '道具']];
+    var tabs = [['summary', '集計'], ['add', '登録'], ['bulk', '一括'], ['remind', 'リマインド'], ['tools', 'その他']];
     var h = '<div class="screen"><a class="back" href="#" data-go="home">一覧</a><div><div class="eyebrow">役員メニュー</div><h1 class="title" style="font-size:24px">運営</h1></div>' +
       '<div class="tabs">' + tabs.map(function (t) { return '<button data-tab="' + t[0] + '"' + (t[0] === tab ? ' class="on"' : '') + '>' + t[1] + '</button>'; }).join('') + '</div><div id="adminBody" style="margin-top:12px"><div class="loading">読み込み中</div></div></div>';
     app.innerHTML = h; bindNav();
