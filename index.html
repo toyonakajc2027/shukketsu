@@ -339,7 +339,8 @@
     return call('getBootstrap', S.pass, S.me).then(function (b) {
       if (!b || !b.ok) throw new Error('合言葉が違います');
       S.role = b.role; store.set(K_ROLE, b.role);
-      S.roster = b.roster; S.events = b.events; S.today = b.today; S.appUrl = b.appUrl; S.graphUrl = b.graphUrl;
+      S.roster = b.roster; S.events = b.events; S.today = b.today; S.graphUrl = b.graphUrl;
+      S.appUrl = HAS_GAS ? b.appUrl : (location.origin + location.pathname); // 配布用は「この画面のURL」
       if (S.me && !b.me) { S.me = ''; store.del(K_ME); } // 名簿から消えた名前は忘れる
     });
   }
@@ -895,15 +896,13 @@
   function adminTools(body) {
     body.innerHTML = '<div class="card"><div class="eyebrow">名簿</div><div class="caption" style="margin-top:4px">総務のマスターシート（２０２６年度出欠・各種確認表）の「マスター」タブから名簿を作り直します。回答の記録は消えません。</div>' +
       '<div style="margin-top:12px"><button class="btn quiet" id="syncGo">名簿を更新する</button></div><div id="syncRes" style="margin-top:8px;font-size:13px"></div></div>' +
-      '<div class="card" style="margin-top:10px"><div class="eyebrow">配布用リンク</div><div class="caption" style="margin-top:4px">LINEグループに貼る共通リンクです。</div><pre class="preview" style="font-size:12px;word-break:break-all">' + esc(S.appUrl) + '</pre><div style="margin-top:10px"><button class="btn quiet small" id="copyApp">コピー</button></div></div>' +
-      '<div class="card" style="margin-top:10px"><div class="eyebrow">この端末</div><div class="caption" style="margin-top:4px">合言葉と名前の記憶を消して最初からやり直します。</div><div style="margin-top:12px"><button class="btn quiet small" id="resetGo">記憶を消す</button></div></div>';
+      '<div class="card" style="margin-top:10px"><div class="eyebrow">配布用リンク</div><div class="caption" style="margin-top:4px">LINEグループに貼る共通リンクです。</div><pre class="preview" style="font-size:12px;word-break:break-all">' + esc(S.appUrl) + '</pre><div style="margin-top:10px"><button class="btn quiet small" id="copyApp">コピー</button></div></div>';
     document.getElementById('syncGo').onclick = function () {
       var b = this; b.disabled = true;
       call('syncRoster', S.pass).then(function (r) { document.getElementById('syncRes').innerHTML = '<span class="ok-msg">' + r.count + '名で更新しました</span>'; b.disabled = false; return load(); })
         .catch(function (e) { b.disabled = false; document.getElementById('syncRes').innerHTML = '<span class="err">' + esc(e.message) + '</span>'; });
     };
     document.getElementById('copyApp').onclick = function () { copyText(S.appUrl).then(function () { toast('コピーしました'); }); };
-    document.getElementById('resetGo').onclick = function () { store.del(K_PASS); store.del(K_ME); store.del(K_ROLE); location.reload(); };
   }
 
   // ── 印刷用
