@@ -2,194 +2,504 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>豊中JC 2027 年間予定</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Zen+Old+Mincho:wght@700&display=swap">
 <style>
 :root{
-  --bg:#F5F6F3; --panel:#FFFFFF; --ink:#1F2723; --ink2:#5B655F; --line:#D9DED9; --line2:#EDF0EC;
-  --sun:#B8423E; --sat:#3B67A6;
-  --rijikai:#2B4C7E; --iinkai:#2E7D6B; --seifuku:#8A6A2C; --zaishin:#6B4A8C;
-  --honkai:#9E3A3A; --block:#B3701E; --reikai:#1F2723; --jotei:#8D948F; --yoteisha:#8D948F;
-  --kento:#D8451F; --kento-bg:#FBE9E3;
-  --chip-ink:#FFFFFF;
+  --bg:#F2F2F7; --panel:#FFFFFF; --panel2:#F7F7FA; --ink:#1D1D1F; --ink2:#6E6E73; --ink3:#AEAEB2;
+  --sep:rgba(60,60,67,.16); --sep2:rgba(60,60,67,.08);
+  --tint:#0B5FD0; --today:#FF3B30;
+  --sun:#D0342C; --sat:#0B5FD0;
+  --rijikai:#0B5FD0; --iinkai:#1E8A4C; --seifuku:#C2700A; --zaishin:#8A3FD1;
+  --reikai:#1D1D1F; --honkai:#D0342C; --block:#1F8FA3; --jotei:#8E8E93; --yoteisha:#8E8E93; --holiday:#D0342C;
+  --kento:#C2700A; --kento-bg:rgba(255,149,0,.14);
+  --seg:rgba(118,118,128,.12); --knob:#FFFFFF; --knob-shadow:0 1px 3px rgba(0,0,0,.12),0 0 1px rgba(0,0,0,.08);
+  --blur-bg:rgba(242,242,247,.78);
+  --sheet-shadow:0 -8px 40px rgba(0,0,0,.18);
+  --tint-mix:14%;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#161917; --panel:#1F2421; --ink:#E8ECE8; --ink2:#A4ADA7; --line:#343B37; --line2:#2A302C;
-    --sun:#E07A76; --sat:#7FA3DA;
-    --rijikai:#5C82BE; --iinkai:#4FA793; --seifuku:#C39A4B; --zaishin:#A07EC6;
-    --honkai:#D46C6C; --block:#D89A4A; --reikai:#E8ECE8; --jotei:#7E8781; --yoteisha:#7E8781;
-    --kento:#F0724E; --kento-bg:#3A231B; --chip-ink:#111412;
+    --bg:#000000; --panel:#1C1C1E; --panel2:#2C2C2E; --ink:#F5F5F7; --ink2:#98989D; --ink3:#636366;
+    --sep:rgba(84,84,88,.6); --sep2:rgba(84,84,88,.3);
+    --tint:#409CFF; --today:#FF453A;
+    --sun:#FF6961; --sat:#5EA9FF;
+    --rijikai:#409CFF; --iinkai:#30D158; --seifuku:#FF9F0A; --zaishin:#BF5AF2;
+    --reikai:#F5F5F7; --honkai:#FF6961; --block:#40C8E0; --jotei:#98989D; --yoteisha:#98989D; --holiday:#FF6961;
+    --kento:#FF9F0A; --kento-bg:rgba(255,159,10,.18);
+    --seg:rgba(118,118,128,.24); --knob:#636366; --knob-shadow:0 1px 3px rgba(0,0,0,.4);
+    --blur-bg:rgba(0,0,0,.72);
+    --sheet-shadow:0 -8px 40px rgba(0,0,0,.6);
+    --tint-mix:22%;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#161917; --panel:#1F2421; --ink:#E8ECE8; --ink2:#A4ADA7; --line:#343B37; --line2:#2A302C;
-  --sun:#E07A76; --sat:#7FA3DA;
-  --rijikai:#5C82BE; --iinkai:#4FA793; --seifuku:#C39A4B; --zaishin:#A07EC6;
-  --honkai:#D46C6C; --block:#D89A4A; --reikai:#E8ECE8; --jotei:#7E8781; --yoteisha:#7E8781;
-  --kento:#F0724E; --kento-bg:#3A231B; --chip-ink:#111412;
+  --bg:#000000; --panel:#1C1C1E; --panel2:#2C2C2E; --ink:#F5F5F7; --ink2:#98989D; --ink3:#636366;
+  --sep:rgba(84,84,88,.6); --sep2:rgba(84,84,88,.3);
+  --tint:#409CFF; --today:#FF453A;
+  --sun:#FF6961; --sat:#5EA9FF;
+  --rijikai:#409CFF; --iinkai:#30D158; --seifuku:#FF9F0A; --zaishin:#BF5AF2;
+  --reikai:#F5F5F7; --honkai:#FF6961; --block:#40C8E0; --jotei:#98989D; --yoteisha:#98989D; --holiday:#FF6961;
+  --kento:#FF9F0A; --kento-bg:rgba(255,159,10,.18);
+  --seg:rgba(118,118,128,.24); --knob:#636366; --knob-shadow:0 1px 3px rgba(0,0,0,.4);
+  --blur-bg:rgba(0,0,0,.72);
+  --sheet-shadow:0 -8px 40px rgba(0,0,0,.6);
+  --tint-mix:22%;
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"BIZ UDPGothic","Hiragino Sans","Noto Sans JP",sans-serif;font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums}
-header{padding:20px 20px 12px;max-width:1280px;margin:0 auto}
-.top{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
-.top h1{font-family:"Zen Old Mincho","Hiragino Mincho ProN",serif;font-size:34px;margin:0;letter-spacing:.02em;font-weight:700}
-.top h1 small{font-family:"BIZ UDPGothic",sans-serif;font-size:14px;font-weight:400;color:var(--ink2);margin-left:10px;letter-spacing:.08em}
-.top .ver{color:var(--ink2);font-size:12px;margin-left:auto}
-.rule{margin:10px 0 0;color:var(--ink2);font-size:13px}
-.legend{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:12px}
-.legend button{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:3px 10px 3px 6px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
-.legend button i{width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--c)}
-.legend button.off{opacity:.38}
-.legend button:focus-visible{outline:2px solid var(--rijikai);outline-offset:2px}
-main{max-width:1280px;margin:0 auto;padding:4px 20px 40px}
-.months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-@media (max-width:1000px){.months{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.months{grid-template-columns:1fr}header,main{padding-left:12px;padding-right:12px}}
-.month{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 12px 10px;display:flex;flex-direction:column;gap:8px}
-.month h2{margin:0;font-size:15px;display:flex;align-items:baseline;gap:8px}
-.month h2 b{font-family:"Zen Old Mincho",serif;font-size:22px;font-weight:700}
-.month h2 span{color:var(--ink2);font-size:12px;font-weight:400}
-.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
-.dow{font-size:10px;color:var(--ink2);text-align:center;padding-bottom:2px;letter-spacing:.06em}
-.dow:first-child{color:var(--sun)}.dow:last-child{color:var(--sat)}
-.day{min-width:0;overflow:hidden;min-height:44px;border-top:1px solid var(--line2);padding:2px 2px 3px;display:flex;flex-direction:column;gap:1px;position:relative}
-.day.empty{border-top-color:transparent}
-.day .n{font-size:11px;line-height:1;color:var(--ink2);text-align:right;padding-right:1px}
-.day.sun .n,.day.hol .n{color:var(--sun)}.day.sat .n{color:var(--sat)}
-.day.hol{background:color-mix(in srgb,var(--sun) 7%,transparent)}
-.chip{display:block;font-size:9.5px;line-height:1.2;padding:1px 3px;border-radius:2px;background:var(--c);color:var(--chip-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
-.chip.line{background:transparent;color:var(--c);border:1px solid var(--c);font-weight:400}
-.chip.dot{background:transparent;color:var(--jotei);padding-left:0;font-weight:400}
-.chip.dot::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--jotei);margin-right:3px;vertical-align:middle}
-.chip.kento{outline:2px solid var(--kento);outline-offset:-1px}
-.chip.kari{border-style:dashed}
-.list{border-top:1px solid var(--line);padding-top:6px;display:flex;flex-direction:column;gap:2px;font-size:12px}
-.list .row{display:grid;grid-template-columns:52px 1fr;gap:6px;align-items:baseline}
-.list .row .d{color:var(--ink2);white-space:nowrap}
-.list .row .d.sun{color:var(--sun)}.list .row .d.sat{color:var(--sat)}
-.list .row .t::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--c);margin-right:6px;vertical-align:-1px}
-.list .row .t.dot::before{border-radius:50%;width:6px;height:6px;background:var(--jotei)}
-.list .row .t.kari{color:var(--ink2)}
-.tag{display:inline-block;font-size:10px;padding:0 5px;border-radius:3px;margin-left:6px;vertical-align:1px}
-.tag.kento{background:var(--kento-bg);color:var(--kento);font-weight:700}
-.tag.kari{border:1px dashed var(--ink2);color:var(--ink2)}
-.hidden{display:none!important}
-.notes{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+html,body{overflow-x:hidden;max-width:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro JP","SF Pro Text","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic Medium",sans-serif;
+  font-size:15px;line-height:1.45;font-variant-numeric:tabular-nums;font-feature-settings:"palt";
+  padding-bottom:env(safe-area-inset-bottom)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--tint);outline-offset:2px;border-radius:6px}
+a{color:var(--tint)}
+
+/* ── header ── */
+.bar{position:sticky;top:0;z-index:20;background:var(--blur-bg);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--sep2)}
+.bar-in{max-width:1180px;margin:0 auto;padding:10px 16px 10px;display:flex;flex-direction:column;gap:10px}
+.title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-height:34px}
+.title h1{margin:0;font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.title h1 span{font-size:17px;font-weight:600;letter-spacing:0;margin-left:6px}
+.title .org{color:var(--ink2);font-size:13px;letter-spacing:.02em}
+.title .ver{margin-left:auto;font-size:12px;color:var(--ink2)}
+@media (max-width:480px){.title .ver{display:none}}
+.row2{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
+.seg{display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;background:var(--seg);border-radius:9px;padding:2px;position:relative;isolation:isolate}
+.seg button{position:relative;z-index:1;padding:5px 14px;font-size:13px;font-weight:600;color:var(--ink);border-radius:7px;transition:color .15s;min-width:56px}
+.seg button[aria-selected="true"]{background:var(--knob);box-shadow:var(--knob-shadow)}
+.nav{display:inline-flex;align-items:center;gap:2px}
+.nav button{width:34px;height:30px;border-radius:8px;font-size:20px;line-height:1;color:var(--tint);display:grid;place-items:center}
+.nav button:hover{background:var(--seg)}
+.nav .cur{font-size:17px;font-weight:700;min-width:4.6em;text-align:center;letter-spacing:-.01em}
+.nav .cur small{font-weight:500;color:var(--ink2);font-size:13px;margin-left:4px}
+@media (max-width:480px){.nav{width:100%;justify-content:space-between}.nav .cur{order:-1;text-align:left;flex:1;min-width:0;padding-left:4px}}
+.hide{display:none!important}
+
+/* ── filters ── */
+.filters{max-width:1180px;margin:0 auto;padding:10px 16px 0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters::-webkit-scrollbar{display:none}
+.pill{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 9px;border-radius:999px;font-size:13px;font-weight:600;
+  color:var(--c);background:color-mix(in srgb,var(--c) var(--tint-mix),transparent);transition:background .15s,color .15s,opacity .15s}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:0 0 auto}
+.pill[aria-pressed="false"]{color:var(--ink2);background:var(--seg)}
+.pill[aria-pressed="false"] i{background:var(--ink3)}
+.pill.kari i{background:transparent;border:1.5px dashed var(--c)}
+
+/* ── layout ── */
+main{max-width:1180px;margin:0 auto;padding:12px 16px 40px}
+.card{background:var(--panel);border-radius:14px;box-shadow:0 0 0 1px var(--sep2)}
+
+/* ── month view ── */
+.dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:10px 6px 6px;font-size:11px;font-weight:600;color:var(--ink2);text-align:center;letter-spacing:.04em}
+.dow>:first-child{color:var(--sun)}.dow>:last-child{color:var(--sat)}
+.mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:0 6px 6px}
+.mgrid .cell{min-width:0;min-height:72px;border-top:1px solid var(--sep2);padding:5px 3px 4px;display:flex;flex-direction:column;gap:2px;border-radius:8px;transition:background .15s;text-align:left;align-items:stretch}
+.mgrid .cell.empty{border-top-color:transparent}
+.mgrid .cell:not(.empty):hover{background:var(--panel2)}
+.mgrid .cell.sel{background:color-mix(in srgb,var(--tint) 10%,transparent)}
+.mgrid .num{font-size:13px;font-weight:600;line-height:1;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;color:var(--ink);margin-left:-1px}
+.mgrid .sun .num,.mgrid .hol .num{color:var(--sun)}.mgrid .sat .num{color:var(--sat)}
+.mgrid .today .num{background:var(--today);color:#fff}
+.mgrid .holname{font-size:10px;color:var(--holiday);line-height:1.2;padding-left:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ebar{display:block;font-size:11px;line-height:1.35;padding:1px 5px;border-radius:4px;color:var(--c);background:color-mix(in srgb,var(--c) var(--tint-mix),transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.ebar.kari{background:transparent;box-shadow:inset 0 0 0 1px var(--c);font-weight:500;color:var(--ink2)}
+.ebar.jotei{background:transparent;color:var(--ink2);font-weight:500;padding-left:0}
+.ebar.jotei::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--jotei);margin:0 4px 1px 3px}
+.ebar.kento{box-shadow:inset 0 0 0 1.5px var(--kento)}
+.dots{display:none;gap:3px;padding-left:3px;flex-wrap:wrap}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--c)}
+.dots i.kari{background:transparent;box-shadow:inset 0 0 0 1.2px var(--c)}
+.dots i.jotei{width:4px;height:4px;align-self:center}
+.dots i.kento{box-shadow:0 0 0 1.5px var(--kento)}
+@media (max-width:700px){
+  .mgrid .cell{min-height:48px;padding:4px 2px}
+  .ebar{display:none}.dots{display:flex}
+  .mgrid .holname{display:none}
+}
+
+/* ── agenda ── */
+.agenda{margin-top:12px}
+.agenda .card{padding:2px 0}
+.arow{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--sep2);align-items:start;transition:background .15s}
+.arow:first-child{border-top:0}
+.arow.sel{background:color-mix(in srgb,var(--tint) 8%,transparent)}
+.arow .date{display:flex;flex-direction:column;line-height:1.1;padding-top:2px}
+.arow .date b{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.arow .date span{font-size:11px;color:var(--ink2);font-weight:600;margin-top:3px}
+.arow .date.sun b,.arow .date.hol b{color:var(--sun)}.arow .date.sat b{color:var(--sat)}
+.arow .items{display:flex;flex-direction:column;gap:6px;min-width:0}
+.eitem{display:flex;align-items:center;gap:9px;text-align:left;padding:4px 8px;margin:-4px -8px;border-radius:8px;min-width:0;width:calc(100% + 16px)}
+.eitem:hover{background:var(--panel2)}
+.eitem .sw{width:10px;height:10px;border-radius:3px;background:var(--c);flex:0 0 auto}
+.eitem .sw.kari{background:transparent;box-shadow:inset 0 0 0 1.5px var(--c)}
+.eitem .sw.jotei{border-radius:50%;width:7px;height:7px;margin:0 1.5px}
+.eitem .tx{font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eitem .tx.dim{color:var(--ink2);font-weight:400}
+.eitem .tx.holi{color:var(--holiday);font-weight:400}
+.badge{flex:0 0 auto;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;letter-spacing:.02em}
+.badge.kento{color:var(--kento);background:var(--kento-bg)}
+.badge.kari{color:var(--ink2);box-shadow:inset 0 0 0 1px var(--sep)}
+.badge.kettei{color:var(--iinkai);background:color-mix(in srgb,var(--iinkai) 14%,transparent)}
+.eitem .chev{margin-left:auto;color:var(--ink3);font-size:14px;flex:0 0 auto}
+.empty-msg{padding:28px 16px;text-align:center;color:var(--ink2);font-size:14px}
+
+/* ── year view ── */
+.ygrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:1000px){.ygrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.ygrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+.ym{padding:12px 10px 10px;text-align:left;display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .15s}
+.ym:hover{box-shadow:0 0 0 1px var(--sep2),0 6px 20px rgba(0,0,0,.08)}
+.ym h3{margin:0;font-size:17px;font-weight:700;color:var(--tint);display:flex;align-items:baseline;gap:8px}
+.ym h3 small{font-size:11px;color:var(--ink2);font-weight:500}
+.ym .g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:2px}
+.ym .g .d{font-size:11px;text-align:center;line-height:1;padding-top:3px;height:24px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.ym .g .d.sun,.ym .g .d.hol{color:var(--sun)}.ym .g .d.sat{color:var(--sat)}
+.ym .g .d.today span{background:var(--today);color:#fff;border-radius:50%;width:16px;height:16px;display:grid;place-items:center;margin-top:-2px}
+.ym .g .dd{display:flex;gap:2px;height:4px}
+.ym .g .dd i{width:4px;height:4px;border-radius:50%;background:var(--c)}
+.ym .g .dd i.kari{background:transparent;box-shadow:inset 0 0 0 1px var(--c)}
+.ym .g .dh{font-size:9px;font-weight:600;color:var(--ink3);text-align:center;padding-bottom:3px}
+.ym .g .dh:first-child{color:var(--sun)}.ym .g .dh:nth-child(7){color:var(--sat)}
+.ym .hl{display:flex;flex-direction:column;gap:2px;margin-top:2px;border-top:1px solid var(--sep2);padding-top:6px}
+.ym .hl span{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
+.ym .hl span b{color:var(--c);font-weight:600}
+.ym .hl span.kento b{color:var(--kento)}
+
+/* ── list view ── */
+.lmonth{margin-top:14px}
+.lmonth:first-child{margin-top:0}
+.lmonth h3{margin:0 0 6px 4px;font-size:20px;font-weight:700;letter-spacing:-.02em;position:sticky;top:var(--barh,112px);z-index:5;background:var(--blur-bg);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);padding:8px 8px 6px;margin-left:-4px;border-radius:8px}
+.lmonth h3 small{font-size:12px;color:var(--ink2);font-weight:500;margin-left:8px}
+
+/* ── notes ── */
+.notes{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:800px){.notes{grid-template-columns:1fr}}
-.note{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
-.note h3{margin:0 0 8px;font-size:14px}
-.note h3.kento{color:var(--kento)}
-.note table{border-collapse:collapse;width:100%;font-size:12.5px}
-.note td{padding:4px 6px 4px 0;vertical-align:top;border-top:1px solid var(--line2)}
-.note td:first-child{white-space:nowrap;color:var(--ink2)}
-.note ul{margin:0;padding-left:18px;font-size:12.5px}
-.note li{margin:2px 0}
-footer{max-width:1280px;margin:0 auto;padding:0 20px 30px;color:var(--ink2);font-size:11px}
-@media print{body{background:#fff}.legend button{border:none}.month{break-inside:avoid}}
+.note{padding:14px 16px}
+.note h4{margin:0 0 8px;font-size:13px;font-weight:700;color:var(--ink2);letter-spacing:.04em}
+.note h4.kento{color:var(--kento)}
+.note table{border-collapse:collapse;width:100%;font-size:13px}
+.note td{padding:6px 6px 6px 0;vertical-align:top;border-top:1px solid var(--sep2)}
+.note tr:first-child td{border-top:0}
+.note td:first-child{white-space:nowrap;color:var(--ink2);width:1%}
+.note{overflow-x:hidden}
+@media (max-width:700px){.note td:first-child{white-space:normal;min-width:7em}}
+.note ul{margin:0;padding-left:18px;font-size:13px}
+.note li{margin:3px 0}
+footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--ink2);font-size:12px;line-height:1.6}
+
+/* ── sheet ── */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;visibility:hidden;transform:translate(-50%,calc(100% + 48px));width:min(560px,100%);background:var(--panel);border-radius:18px 18px 0 0;box-shadow:var(--sheet-shadow);z-index:41;transition:transform .28s cubic-bezier(.2,.8,.2,1),visibility 0s .28s;padding:10px 20px calc(20px + env(safe-area-inset-bottom))}
+.sheet.on{visibility:visible;transform:translate(-50%,0);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.sheet .grab{width:36px;height:5px;border-radius:3px;background:var(--ink3);margin:0 auto 14px;opacity:.6}
+.sheet .cat{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--c);display:flex;align-items:center;gap:6px}
+.sheet .cat i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.sheet h2{margin:6px 0 4px;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.25;text-wrap:balance}
+.sheet .when{font-size:15px;color:var(--ink2)}
+.sheet .st{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.sheet .memo{margin-top:12px;padding:12px 14px;background:var(--panel2);border-radius:10px;font-size:14px;line-height:1.6;color:var(--ink)}
+.sheet .memo:empty{display:none}
+.sheet .close{position:absolute;top:12px;right:14px;width:30px;height:30px;border-radius:50%;background:var(--seg);display:grid;place-items:center;font-size:15px;color:var(--ink2)}
+@media (min-width:700px){.sheet{bottom:24px;border-radius:18px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{.bar{position:static;background:#fff}.filters,.sheet,.scrim,.nav button{display:none}body{background:#fff}.card{box-shadow:none;border:1px solid #ccc}}
 </style>
 </head>
 <body>
-<header>
-  <div class="top">
-    <h1>2027 年間予定<small>一般社団法人豊中青年会議所</small></h1>
-    <div class="ver">v1 案（2026-09-14）・確定前のイメージ</div>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="title">
+      <h1>2027<span>年間予定</span></h1>
+      <div class="org">豊中青年会議所</div>
+      <div class="ver">案 v1 ・ 2026-09-14</div>
+    </div>
+    <div class="row2">
+      <div class="seg" role="tablist" aria-label="表示">
+        <button role="tab" data-view="year" aria-selected="false">年</button>
+        <button role="tab" data-view="month" aria-selected="true">月</button>
+        <button role="tab" data-view="list" aria-selected="false">一覧</button>
+      </div>
+      <div class="nav" id="nav">
+        <button id="prev" aria-label="前の月">‹</button>
+        <div class="cur" id="cur"></div>
+        <button id="next" aria-label="次の月">›</button>
+      </div>
+    </div>
   </div>
-  <p class="rule">会議体の基本リズム: 第1木曜 理事会／第2木曜 委員会／第3木曜 正副／第4水曜 財審。上程は各会議の3日前。例会は第4木曜で仮置き（未決定）。</p>
-  <div class="legend" id="legend"></div>
 </header>
 
+<div class="filters" id="filters" aria-label="表示する種別"></div>
+
 <main>
-  <div class="months" id="months"></div>
+  <section id="view-year" class="hide"><div class="ygrid" id="ygrid"></div></section>
+  <section id="view-month">
+    <div class="card">
+      <div class="dow"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div>
+      <div class="mgrid" id="mgrid"></div>
+    </div>
+    <div class="agenda"><div class="card" id="agenda"></div></div>
+  </section>
+  <section id="view-list" class="hide"><div id="lst"></div></section>
+
   <div class="notes">
-    <div class="note">
-      <h3 class="kento">検討中（決めるまで赤枠）</h3>
+    <div class="card note">
+      <h4 class="kento">検討中</h4>
       <table>
-        <tr><td>11/4(木) 第11回理事会</td><td>JCI世界会議 11/2〜6 と重複。案: 11/11(木)へ後ろ倒し（委員会は11/17等へ）か 10/28(木)へ前倒し</td></tr>
-        <tr><td>上程日 1/24・3/21・5/3</td><td>京都会議・春分の日・憲法記念日と重複。前後の平日へずらすか運用で吸収</td></tr>
-        <tr><td>上程日 1/16・5/15</td><td>正副を火曜にした分、3日前が土曜になる。平日にするなら前日の金曜</td></tr>
-        <tr><td>例会（全月）</td><td>2026年実績の第4木曜で仮置き。ルールとして採用するか要確認</td></tr>
+        <tr><td>11/4(木) 第11回理事会</td><td>JCI世界会議 11/2〜6 と重なる。案は 11/11(木) へ後ろ倒し（委員会は 11/17 頃へ）か 10/28(木) へ前倒し</td></tr>
+        <tr><td>例会（各月）</td><td>2026年の実績（第4木曜）で仮置き。ルールとして採用するか未決</td></tr>
+        <tr><td>上程日</td><td>1/24・3/21・5/3 が京都会議・春分の日・憲法記念日と重なる。前後の平日へずらすか運用で吸収。火曜の正副（1/19・5/18）は3日前が土曜になる</td></tr>
       </table>
     </div>
-    <div class="note">
-      <h3>決定済み（2026-09-14）</h3>
+    <div class="card note">
+      <h4>決まっていること</h4>
       <table>
-        <tr><td>第2回正副</td><td>1/21 → <b>1/19(火)</b>（京都会議を回避）</td></tr>
-        <tr><td>第2回委員会</td><td>2/11 → <b>2/12(金)</b>（建国記念の日を回避）</td></tr>
-        <tr><td>第6回正副</td><td>5/20 → <b>5/18(火)</b>（ASPACを回避）</td></tr>
-        <tr><td>第8回委員会</td><td>8/12(木) 据え置き（お盆だが変更なし）</td></tr>
+        <tr><td>基本のリズム</td><td>第1木曜 理事会／第2木曜 委員会／第3木曜 正副／第4水曜 財審。上程は各会議の3日前</td></tr>
+        <tr><td>第2回正副</td><td>京都会議を避けて <b>1/19(火)</b></td></tr>
+        <tr><td>第2回委員会</td><td>建国記念の日を避けて <b>2/12(金)</b></td></tr>
+        <tr><td>第6回正副</td><td>ASPACを避けて <b>5/18(火)</b></td></tr>
+        <tr><td>第8回委員会</td><td>お盆だが <b>8/12(木)</b> のまま</td></tr>
         <tr><td>大納会・会員会議所会議</td><td><b>12/6(月)</b></td></tr>
-        <tr><td>理事選開票・2028予定者会議</td><td>通常どおり7月から（日付は未定）</td></tr>
+        <tr><td>理事選開票・2028予定者会議</td><td>通常どおり7月から（日付はこれから）</td></tr>
       </table>
-      <h3 style="margin-top:14px">まだ入っていないもの</h3>
+      <h4 style="margin-top:14px">まだ入っていないもの</h4>
       <ul>
         <li>通常総会・新年賀会・出陣式（1月）、60周年記念式典（6月）</li>
         <li>わんぱく相撲・JCカップ（体育施設使用表 9/30 までに日程）</li>
         <li>家族親睦事業（8月）、臨時総会（11月）、卒業式（12月）</li>
-        <li>北地域KKK・大阪ブロック正副会長会議・近畿地区の各会議（外から日程が来る）</li>
+        <li>北地域KKK・大阪ブロック正副会長会議・近畿地区の各会議（外から日程が来るもの）</li>
       </ul>
     </div>
   </div>
 </main>
-<footer>データ: 資料_年間予定/2027年間予定_統合.csv（2026-09-14）。祝日は2027年の一般カレンダー（官報告示後に照合）。凡例を押すと種別の表示を切り替えられます。</footer>
+<footer>データは 資料_年間予定/2027年間予定_統合.csv（2026-09-14 時点）。祝日は2027年の一般的なカレンダーで、官報告示後に照合します。予定を押すと詳しい説明が出ます。</footer>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title">
+  <div class="grab"></div>
+  <button class="close" id="sh-close" aria-label="閉じる">✕</button>
+  <div class="cat" id="sh-cat"><i></i><span></span></div>
+  <h2 id="sh-title"></h2>
+  <div class="when" id="sh-when"></div>
+  <div class="st" id="sh-st"></div>
+  <div class="memo" id="sh-memo"></div>
+</div>
 
 <script>
-const EV = [{"d":"2027-01-01","c":"holiday","t":"元日","n":"","k":false},{"d":"2027-01-04","c":"jotei","t":"理事会1上程","n":"","k":false},{"d":"2027-01-07","c":"rijikai","t":"第1回理事会","n":"","k":false},{"d":"2027-01-11","c":"holiday","t":"成人の日","n":"","k":false},{"d":"2027-01-14","c":"iinkai","t":"第1回委員会","n":"","k":false},{"d":"2027-01-16","c":"jotei","t":"正副2上程","n":"正副1/19の3日前(土曜)。平日にするなら1/15(金)","k":false},{"d":"2027-01-19","c":"seifuku","t":"第2回正副","n":"260914決定: 京都会議(1/21〜24)回避で1/21(木)から前倒し","k":false},{"d":"2027-01-21","c":"honkai","t":"京都会議（1/21〜24）","n":"","k":false},{"d":"2027-01-22","c":"honkai","t":"京都会議","n":"","k":false},{"d":"2027-01-23","c":"honkai","t":"京都会議","n":"","k":false},{"d":"2027-01-24","c":"honkai","t":"京都会議","n":"","k":false},{"d":"2027-01-24","c":"jotei","t":"財審2上程","n":"固定行事(京都会議)と重複→検討","k":true},{"d":"2027-01-27","c":"zaishin","t":"第2回財審","n":"","k":false},{"d":"2027-02-01","c":"jotei","t":"理事会2上程","n":"","k":false},{"d":"2027-02-04","c":"rijikai","t":"第2回理事会","n":"","k":false},{"d":"2027-02-11","c":"holiday","t":"建国記念の日","n":"","k":false},{"d":"2027-02-12","c":"iinkai","t":"第2回委員会","n":"260914決定: 建国記念の日(2/11)回避で翌日へ","k":false},{"d":"2027-02-15","c":"jotei","t":"正副3上程","n":"","k":false},{"d":"2027-02-18","c":"seifuku","t":"第3回正副","n":"","k":false},{"d":"2027-02-21","c":"jotei","t":"財審3上程","n":"","k":false},{"d":"2027-02-23","c":"holiday","t":"天皇誕生日","n":"","k":false},{"d":"2027-02-24","c":"zaishin","t":"第3回財審","n":"前日が祝日(天皇誕生日)","k":false},{"d":"2027-02-25","c":"reikai","t":"2月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-03-01","c":"jotei","t":"理事会3上程","n":"","k":false},{"d":"2027-03-04","c":"rijikai","t":"第3回理事会","n":"","k":false},{"d":"2027-03-11","c":"iinkai","t":"第3回委員会","n":"","k":false},{"d":"2027-03-15","c":"jotei","t":"正副4上程","n":"","k":false},{"d":"2027-03-18","c":"seifuku","t":"第4回正副","n":"","k":false},{"d":"2027-03-21","c":"holiday","t":"春分の日","n":"","k":false},{"d":"2027-03-21","c":"jotei","t":"財審4上程","n":"祝日(春分の日)と重複→検討。翌日が祝日(振替休日)","k":true},{"d":"2027-03-22","c":"holiday","t":"振替休日","n":"","k":false},{"d":"2027-03-24","c":"zaishin","t":"第4回財審","n":"","k":false},{"d":"2027-03-25","c":"reikai","t":"3月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-03-29","c":"jotei","t":"理事会4上程","n":"","k":false},{"d":"2027-04-01","c":"rijikai","t":"第4回理事会","n":"","k":false},{"d":"2027-04-08","c":"iinkai","t":"第4回委員会","n":"","k":false},{"d":"2027-04-12","c":"jotei","t":"正副5上程","n":"","k":false},{"d":"2027-04-15","c":"seifuku","t":"第5回正副","n":"","k":false},{"d":"2027-04-22","c":"reikai","t":"4月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-04-25","c":"jotei","t":"財審5上程","n":"","k":false},{"d":"2027-04-28","c":"zaishin","t":"第5回財審","n":"翌日が祝日(昭和の日)","k":false},{"d":"2027-04-29","c":"holiday","t":"昭和の日","n":"","k":false},{"d":"2027-05-03","c":"holiday","t":"憲法記念日","n":"","k":false},{"d":"2027-05-03","c":"jotei","t":"理事会5上程","n":"祝日(憲法記念日)と重複→検討。翌日が祝日(みどりの日)","k":true},{"d":"2027-05-04","c":"holiday","t":"みどりの日","n":"","k":false},{"d":"2027-05-05","c":"holiday","t":"こどもの日","n":"","k":false},{"d":"2027-05-06","c":"rijikai","t":"第5回理事会","n":"前日が祝日(こどもの日)","k":false},{"d":"2027-05-13","c":"iinkai","t":"第5回委員会","n":"","k":false},{"d":"2027-05-15","c":"jotei","t":"正副6上程","n":"正副5/18の3日前(土曜)。平日にするなら5/14(金)","k":false},{"d":"2027-05-18","c":"seifuku","t":"第6回正副","n":"260914決定: ASPAC(5/20〜23)回避で5/20(木)から前倒し","k":false},{"d":"2027-05-20","c":"honkai","t":"ASPAC（5/20〜23）","n":"","k":false},{"d":"2027-05-21","c":"honkai","t":"ASPAC","n":"","k":false},{"d":"2027-05-22","c":"honkai","t":"ASPAC","n":"","k":false},{"d":"2027-05-23","c":"honkai","t":"ASPAC","n":"","k":false},{"d":"2027-05-23","c":"jotei","t":"財審6上程","n":"固定行事(ASPAC)と重複→検討","k":true},{"d":"2027-05-26","c":"zaishin","t":"第6回財審","n":"","k":false},{"d":"2027-05-27","c":"reikai","t":"5月例会(仮・北地域8LOM合同)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-05-31","c":"jotei","t":"理事会6上程","n":"","k":false},{"d":"2027-06-03","c":"rijikai","t":"第6回理事会","n":"","k":false},{"d":"2027-06-10","c":"iinkai","t":"第6回委員会","n":"","k":false},{"d":"2027-06-14","c":"jotei","t":"正副7上程","n":"","k":false},{"d":"2027-06-17","c":"seifuku","t":"第7回正副","n":"","k":false},{"d":"2027-06-20","c":"jotei","t":"財審7上程","n":"","k":false},{"d":"2027-06-23","c":"zaishin","t":"第7回財審","n":"","k":false},{"d":"2027-06-24","c":"reikai","t":"6月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-06-28","c":"jotei","t":"理事会7上程","n":"","k":false},{"d":"2027-07-01","c":"rijikai","t":"第7回理事会","n":"","k":false},{"d":"2027-07-08","c":"iinkai","t":"第7回委員会","n":"","k":false},{"d":"2027-07-10","c":"honkai","t":"サマーコンファレンス（7/10・11）","n":"","k":false},{"d":"2027-07-11","c":"honkai","t":"サマーコンファレンス","n":"","k":false},{"d":"2027-07-12","c":"jotei","t":"正副8上程","n":"","k":false},{"d":"2027-07-15","c":"seifuku","t":"第8回正副","n":"","k":false},{"d":"2027-07-19","c":"holiday","t":"海の日","n":"","k":false},{"d":"2027-07-22","c":"reikai","t":"7月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-07-25","c":"jotei","t":"財審8上程","n":"","k":false},{"d":"2027-07-28","c":"zaishin","t":"第8回財審","n":"","k":false},{"d":"2027-08-02","c":"jotei","t":"理事会8上程","n":"","k":false},{"d":"2027-08-05","c":"rijikai","t":"第8回理事会","n":"","k":false},{"d":"2027-08-11","c":"holiday","t":"山の日","n":"","k":false},{"d":"2027-08-12","c":"iinkai","t":"第8回委員会","n":"260914決定: 前日山の日・お盆だが据え置き","k":false},{"d":"2027-08-16","c":"jotei","t":"正副9上程","n":"お盆期間だがアップロードのみ。8/12委員会据え置きに合わせ据え置き","k":false},{"d":"2027-08-19","c":"seifuku","t":"第9回正副","n":"","k":false},{"d":"2027-08-22","c":"jotei","t":"財審9上程","n":"","k":false},{"d":"2027-08-25","c":"zaishin","t":"第9回財審","n":"","k":false},{"d":"2027-08-26","c":"reikai","t":"8月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-08-30","c":"jotei","t":"理事会9上程","n":"","k":false},{"d":"2027-09-02","c":"rijikai","t":"第9回理事会","n":"","k":false},{"d":"2027-09-09","c":"iinkai","t":"第9回委員会","n":"","k":false},{"d":"2027-09-13","c":"jotei","t":"正副10上程","n":"","k":false},{"d":"2027-09-16","c":"seifuku","t":"第10回正副","n":"","k":false},{"d":"2027-09-19","c":"jotei","t":"財審10上程","n":"翌日が祝日(敬老の日)","k":false},{"d":"2027-09-20","c":"holiday","t":"敬老の日","n":"","k":false},{"d":"2027-09-22","c":"zaishin","t":"第10回財審","n":"翌日が祝日(秋分の日)","k":false},{"d":"2027-09-23","c":"holiday","t":"秋分の日","n":"","k":false},{"d":"2027-09-23","c":"reikai","t":"9月公開例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-09-30","c":"honkai","t":"全国大会（9/30〜10/3）","n":"","k":false},{"d":"2027-10-01","c":"honkai","t":"全国大会","n":"","k":false},{"d":"2027-10-02","c":"honkai","t":"全国大会","n":"","k":false},{"d":"2027-10-03","c":"honkai","t":"全国大会","n":"","k":false},{"d":"2027-10-04","c":"jotei","t":"理事会10上程","n":"","k":false},{"d":"2027-10-07","c":"rijikai","t":"第10回理事会","n":"","k":false},{"d":"2027-10-11","c":"holiday","t":"スポーツの日","n":"","k":false},{"d":"2027-10-14","c":"iinkai","t":"第10回委員会","n":"","k":false},{"d":"2027-10-18","c":"jotei","t":"正副11上程","n":"","k":false},{"d":"2027-10-21","c":"seifuku","t":"第11回正副","n":"","k":false},{"d":"2027-10-24","c":"jotei","t":"財審11上程","n":"","k":false},{"d":"2027-10-27","c":"zaishin","t":"第11回財審","n":"","k":false},{"d":"2027-10-28","c":"reikai","t":"10月例会(仮・4LOM合同)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-11-01","c":"jotei","t":"理事会11上程","n":"","k":false},{"d":"2027-11-02","c":"honkai","t":"JCI世界会議（11/2〜6）","n":"","k":false},{"d":"2027-11-03","c":"holiday","t":"文化の日","n":"","k":false},{"d":"2027-11-03","c":"honkai","t":"JCI世界会議","n":"","k":false},{"d":"2027-11-04","c":"honkai","t":"JCI世界会議","n":"","k":false},{"d":"2027-11-04","c":"rijikai","t":"第11回理事会","n":"固定行事(JCI世界会議 11/2〜6)と重複→検討中(260914時点未決)。前日文化の日","k":true},{"d":"2027-11-05","c":"honkai","t":"JCI世界会議","n":"","k":false},{"d":"2027-11-06","c":"honkai","t":"JCI世界会議","n":"","k":false},{"d":"2027-11-11","c":"iinkai","t":"第11回委員会","n":"","k":false},{"d":"2027-11-15","c":"jotei","t":"正副12上程","n":"","k":false},{"d":"2027-11-18","c":"seifuku","t":"第12回正副","n":"","k":false},{"d":"2027-11-21","c":"jotei","t":"財審12上程","n":"","k":false},{"d":"2027-11-23","c":"holiday","t":"勤労感謝の日","n":"","k":false},{"d":"2027-11-24","c":"zaishin","t":"第12回財審","n":"前日が祝日(勤労感謝の日)","k":false},{"d":"2027-11-25","c":"reikai","t":"11月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false},{"d":"2027-11-29","c":"jotei","t":"理事会12上程","n":"","k":false},{"d":"2027-12-02","c":"rijikai","t":"第12回理事会","n":"","k":false},{"d":"2027-12-06","c":"block","t":"会員会議所会議","n":"","k":false},{"d":"2027-12-06","c":"block","t":"大阪ブロック大納会","n":"","k":false},{"d":"2027-12-09","c":"iinkai","t":"第12回委員会","n":"","k":false},{"d":"2027-12-16","c":"yoteisha","t":"2028年度 第1回正副(予定者側が決める)","n":"","k":false},{"d":"2027-12-22","c":"yoteisha","t":"2028年度 第1回財審(予定者側が決める)","n":"","k":false},{"d":"2027-12-23","c":"reikai","t":"12月例会(仮)","n":"2026年実績(第4木曜)からの仮置き。未決定","k":false}];
-const CAT = [
-  ['rijikai','理事会',false],['iinkai','委員会',false],['seifuku','正副',false],['zaishin','財審',false],
-  ['reikai','例会(仮)',false],['jotei','上程日',false],
-  ['honkai','日本JC・JCI',false],['block','大阪ブロック',false],['yoteisha','2028予定者(参考)',false],['holiday','祝日',false]
-];
-const on = Object.fromEntries(CAT.map(c=>[c[0],true]));
-const byDay = {};
-EV.forEach(e=>{(byDay[e.d]=byDay[e.d]||[]).push(e)});
+const EV = [{"d":"2027-01-01","c":"holiday","t":"元日","n":"","s":""},{"d":"2027-01-04","c":"jotei","t":"理事会1上程","n":"","s":""},{"d":"2027-01-07","c":"rijikai","t":"第1回理事会","n":"","s":""},{"d":"2027-01-11","c":"holiday","t":"成人の日","n":"","s":""},{"d":"2027-01-14","c":"iinkai","t":"第1回委員会","n":"","s":""},{"d":"2027-01-16","c":"jotei","t":"正副2上程","n":"正副1/19の3日前(土曜)。平日にするなら1/15(金)","s":""},{"d":"2027-01-19","c":"seifuku","t":"第2回正副","n":"2026-09-14 決定。京都会議(1/21〜24)回避で1/21(木)から前倒し","s":"kettei"},{"d":"2027-01-21","c":"honkai","t":"京都会議（1/21〜24）","n":"","s":""},{"d":"2027-01-22","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-23","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-24","c":"honkai","t":"京都会議","n":"","s":""},{"d":"2027-01-24","c":"jotei","t":"財審2上程","n":"固定行事(京都会議)と重複→検討","s":"kento"},{"d":"2027-01-27","c":"zaishin","t":"第2回財審","n":"","s":""},{"d":"2027-02-01","c":"jotei","t":"理事会2上程","n":"","s":""},{"d":"2027-02-04","c":"rijikai","t":"第2回理事会","n":"","s":""},{"d":"2027-02-11","c":"holiday","t":"建国記念の日","n":"","s":""},{"d":"2027-02-12","c":"iinkai","t":"第2回委員会","n":"2026-09-14 決定。建国記念の日(2/11)回避で翌日へ","s":"kettei"},{"d":"2027-02-15","c":"jotei","t":"正副3上程","n":"","s":""},{"d":"2027-02-18","c":"seifuku","t":"第3回正副","n":"","s":""},{"d":"2027-02-21","c":"jotei","t":"財審3上程","n":"","s":""},{"d":"2027-02-23","c":"holiday","t":"天皇誕生日","n":"","s":""},{"d":"2027-02-24","c":"zaishin","t":"第3回財審","n":"前日が祝日(天皇誕生日)","s":""},{"d":"2027-02-25","c":"reikai","t":"2月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-03-01","c":"jotei","t":"理事会3上程","n":"","s":""},{"d":"2027-03-04","c":"rijikai","t":"第3回理事会","n":"","s":""},{"d":"2027-03-11","c":"iinkai","t":"第3回委員会","n":"","s":""},{"d":"2027-03-15","c":"jotei","t":"正副4上程","n":"","s":""},{"d":"2027-03-18","c":"seifuku","t":"第4回正副","n":"","s":""},{"d":"2027-03-21","c":"holiday","t":"春分の日","n":"","s":""},{"d":"2027-03-21","c":"jotei","t":"財審4上程","n":"祝日(春分の日)と重複→検討。翌日が祝日(振替休日)","s":"kento"},{"d":"2027-03-22","c":"holiday","t":"振替休日","n":"","s":""},{"d":"2027-03-24","c":"zaishin","t":"第4回財審","n":"","s":""},{"d":"2027-03-25","c":"reikai","t":"3月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-03-29","c":"jotei","t":"理事会4上程","n":"","s":""},{"d":"2027-04-01","c":"rijikai","t":"第4回理事会","n":"","s":""},{"d":"2027-04-08","c":"iinkai","t":"第4回委員会","n":"","s":""},{"d":"2027-04-12","c":"jotei","t":"正副5上程","n":"","s":""},{"d":"2027-04-15","c":"seifuku","t":"第5回正副","n":"","s":""},{"d":"2027-04-22","c":"reikai","t":"4月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-04-25","c":"jotei","t":"財審5上程","n":"","s":""},{"d":"2027-04-28","c":"zaishin","t":"第5回財審","n":"翌日が祝日(昭和の日)","s":""},{"d":"2027-04-29","c":"holiday","t":"昭和の日","n":"","s":""},{"d":"2027-05-03","c":"holiday","t":"憲法記念日","n":"","s":""},{"d":"2027-05-03","c":"jotei","t":"理事会5上程","n":"祝日(憲法記念日)と重複→検討。翌日が祝日(みどりの日)","s":"kento"},{"d":"2027-05-04","c":"holiday","t":"みどりの日","n":"","s":""},{"d":"2027-05-05","c":"holiday","t":"こどもの日","n":"","s":""},{"d":"2027-05-06","c":"rijikai","t":"第5回理事会","n":"前日が祝日(こどもの日)","s":""},{"d":"2027-05-13","c":"iinkai","t":"第5回委員会","n":"","s":""},{"d":"2027-05-15","c":"jotei","t":"正副6上程","n":"正副5/18の3日前(土曜)。平日にするなら5/14(金)","s":""},{"d":"2027-05-18","c":"seifuku","t":"第6回正副","n":"2026-09-14 決定。ASPAC(5/20〜23)回避で5/20(木)から前倒し","s":"kettei"},{"d":"2027-05-20","c":"honkai","t":"ASPAC（5/20〜23）","n":"","s":""},{"d":"2027-05-21","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-22","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-23","c":"honkai","t":"ASPAC","n":"","s":""},{"d":"2027-05-23","c":"jotei","t":"財審6上程","n":"固定行事(ASPAC)と重複→検討","s":"kento"},{"d":"2027-05-26","c":"zaishin","t":"第6回財審","n":"","s":""},{"d":"2027-05-27","c":"reikai","t":"5月例会（北地域8LOM合同）","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-05-31","c":"jotei","t":"理事会6上程","n":"","s":""},{"d":"2027-06-03","c":"rijikai","t":"第6回理事会","n":"","s":""},{"d":"2027-06-10","c":"iinkai","t":"第6回委員会","n":"","s":""},{"d":"2027-06-14","c":"jotei","t":"正副7上程","n":"","s":""},{"d":"2027-06-17","c":"seifuku","t":"第7回正副","n":"","s":""},{"d":"2027-06-20","c":"jotei","t":"財審7上程","n":"","s":""},{"d":"2027-06-23","c":"zaishin","t":"第7回財審","n":"","s":""},{"d":"2027-06-24","c":"reikai","t":"6月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-06-28","c":"jotei","t":"理事会7上程","n":"","s":""},{"d":"2027-07-01","c":"rijikai","t":"第7回理事会","n":"","s":""},{"d":"2027-07-08","c":"iinkai","t":"第7回委員会","n":"","s":""},{"d":"2027-07-10","c":"honkai","t":"サマーコンファレンス（7/10・11）","n":"","s":""},{"d":"2027-07-11","c":"honkai","t":"サマーコンファレンス","n":"","s":""},{"d":"2027-07-12","c":"jotei","t":"正副8上程","n":"","s":""},{"d":"2027-07-15","c":"seifuku","t":"第8回正副","n":"","s":""},{"d":"2027-07-19","c":"holiday","t":"海の日","n":"","s":""},{"d":"2027-07-22","c":"reikai","t":"7月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-07-25","c":"jotei","t":"財審8上程","n":"","s":""},{"d":"2027-07-28","c":"zaishin","t":"第8回財審","n":"","s":""},{"d":"2027-08-02","c":"jotei","t":"理事会8上程","n":"","s":""},{"d":"2027-08-05","c":"rijikai","t":"第8回理事会","n":"","s":""},{"d":"2027-08-11","c":"holiday","t":"山の日","n":"","s":""},{"d":"2027-08-12","c":"iinkai","t":"第8回委員会","n":"2026-09-14 決定。前日山の日・お盆だが据え置き","s":"kettei"},{"d":"2027-08-16","c":"jotei","t":"正副9上程","n":"お盆期間だがアップロードのみ。8/12委員会据え置きに合わせ据え置き","s":""},{"d":"2027-08-19","c":"seifuku","t":"第9回正副","n":"","s":""},{"d":"2027-08-22","c":"jotei","t":"財審9上程","n":"","s":""},{"d":"2027-08-25","c":"zaishin","t":"第9回財審","n":"","s":""},{"d":"2027-08-26","c":"reikai","t":"8月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-08-30","c":"jotei","t":"理事会9上程","n":"","s":""},{"d":"2027-09-02","c":"rijikai","t":"第9回理事会","n":"","s":""},{"d":"2027-09-09","c":"iinkai","t":"第9回委員会","n":"","s":""},{"d":"2027-09-13","c":"jotei","t":"正副10上程","n":"","s":""},{"d":"2027-09-16","c":"seifuku","t":"第10回正副","n":"","s":""},{"d":"2027-09-19","c":"jotei","t":"財審10上程","n":"翌日が祝日(敬老の日)","s":""},{"d":"2027-09-20","c":"holiday","t":"敬老の日","n":"","s":""},{"d":"2027-09-22","c":"zaishin","t":"第10回財審","n":"翌日が祝日(秋分の日)","s":""},{"d":"2027-09-23","c":"holiday","t":"秋分の日","n":"","s":""},{"d":"2027-09-23","c":"reikai","t":"9月公開例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-09-30","c":"honkai","t":"全国大会（9/30〜10/3）","n":"","s":""},{"d":"2027-10-01","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-02","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-03","c":"honkai","t":"全国大会","n":"","s":""},{"d":"2027-10-04","c":"jotei","t":"理事会10上程","n":"","s":""},{"d":"2027-10-07","c":"rijikai","t":"第10回理事会","n":"","s":""},{"d":"2027-10-11","c":"holiday","t":"スポーツの日","n":"","s":""},{"d":"2027-10-14","c":"iinkai","t":"第10回委員会","n":"","s":""},{"d":"2027-10-18","c":"jotei","t":"正副11上程","n":"","s":""},{"d":"2027-10-21","c":"seifuku","t":"第11回正副","n":"","s":""},{"d":"2027-10-24","c":"jotei","t":"財審11上程","n":"","s":""},{"d":"2027-10-27","c":"zaishin","t":"第11回財審","n":"","s":""},{"d":"2027-10-28","c":"reikai","t":"10月例会（4LOM合同）","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-11-01","c":"jotei","t":"理事会11上程","n":"","s":""},{"d":"2027-11-02","c":"honkai","t":"JCI世界会議（11/2〜6）","n":"","s":""},{"d":"2027-11-03","c":"holiday","t":"文化の日","n":"","s":""},{"d":"2027-11-03","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-04","c":"rijikai","t":"第11回理事会","n":"固定行事(JCI世界会議 11/2〜6)と重複→検討中(260914時点未決)。前日文化の日","s":"kento"},{"d":"2027-11-04","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-05","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-06","c":"honkai","t":"JCI世界会議","n":"","s":""},{"d":"2027-11-11","c":"iinkai","t":"第11回委員会","n":"","s":""},{"d":"2027-11-15","c":"jotei","t":"正副12上程","n":"","s":""},{"d":"2027-11-18","c":"seifuku","t":"第12回正副","n":"","s":""},{"d":"2027-11-21","c":"jotei","t":"財審12上程","n":"","s":""},{"d":"2027-11-23","c":"holiday","t":"勤労感謝の日","n":"","s":""},{"d":"2027-11-24","c":"zaishin","t":"第12回財審","n":"前日が祝日(勤労感謝の日)","s":""},{"d":"2027-11-25","c":"reikai","t":"11月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"},{"d":"2027-11-29","c":"jotei","t":"理事会12上程","n":"","s":""},{"d":"2027-12-02","c":"rijikai","t":"第12回理事会","n":"","s":""},{"d":"2027-12-06","c":"block","t":"会員会議所会議","n":"","s":""},{"d":"2027-12-06","c":"block","t":"大阪ブロック大納会","n":"","s":""},{"d":"2027-12-09","c":"iinkai","t":"第12回委員会","n":"","s":""},{"d":"2027-12-16","c":"yoteisha","t":"2028年度 第1回正副(予定者側が決める)","n":"","s":""},{"d":"2027-12-22","c":"yoteisha","t":"2028年度 第1回財審(予定者側が決める)","n":"","s":""},{"d":"2027-12-23","c":"reikai","t":"12月例会","n":"2026年実績（第4木曜）からの仮置き。日程は未決定","s":"kari"}];
+const CAT = {
+  rijikai:['理事会',true], iinkai:['委員会',true], seifuku:['正副',true], zaishin:['財審',true],
+  reikai:['例会（仮）',true], honkai:['日本JC・JCI',true], block:['大阪ブロック',true],
+  jotei:['上程日',false], yoteisha:['2028予定者',false], holiday:['祝日',true]
+};
 const DOW = ['日','月','火','水','木','金','土'];
-const legend = document.getElementById('legend');
-CAT.forEach(([k,label])=>{
-  const b=document.createElement('button'); b.type='button'; b.style.setProperty('--c',`var(--${k})`);
-  b.innerHTML=`<i></i>${label}`; b.setAttribute('aria-pressed','true');
-  b.onclick=()=>{on[k]=!on[k]; b.classList.toggle('off',!on[k]); b.setAttribute('aria-pressed',String(on[k])); document.querySelectorAll(`[data-c="${k}"]`).forEach(el=>el.classList.toggle('hidden',!on[k]))};
-  legend.appendChild(b);
+const Y = 2027;
+const todayISO = new Date().toISOString().slice(0,10);
+const byDay = {};
+EV.forEach(e => (byDay[e.d] = byDay[e.d] || []).push(e));
+
+let on = Object.fromEntries(Object.entries(CAT).map(([k,v]) => [k, v[1]]));
+try { const s = JSON.parse(localStorage.getItem('jc2027-filters') || 'null'); if (s) on = { ...on, ...s }; } catch (_) {}
+const saveFilters = () => { try { localStorage.setItem('jc2027-filters', JSON.stringify(on)); } catch (_) {} };
+
+const state = { view: 'month', m: 1, sel: null };
+(function initState() {
+  const wide = window.innerWidth >= 1000;
+  const now = new Date();
+  state.m = now.getFullYear() === Y ? now.getMonth() + 1 : 1;
+  state.view = wide ? 'year' : 'month';
+  const h = location.hash.replace('#', '');
+  if (h === 'year' || h === 'list') state.view = h;
+  const mm = h.match(/^m(\d{1,2})$/); if (mm) { state.view = 'month'; state.m = Math.min(12, Math.max(1, +mm[1])); }
+})();
+
+const iso = (m, d) => `${Y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+const visible = e => on[e.c];
+const isHol = key => (byDay[key] || []).some(e => e.c === 'holiday');
+const dayClass = (dow, key) => (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '') + (isHol(key) ? ' hol' : '') + (key === todayISO ? ' today' : '');
+const short = t => t.replace(/（[^）]*）/g, '');
+const stName = { kento: '検討中', kari: '仮', kettei: '決定' };
+const catLabel = c => CAT[c][0].replace('（仮）','');
+
+/* filters */
+const filters = document.getElementById('filters');
+Object.entries(CAT).forEach(([k, [label]]) => {
+  const b = document.createElement('button');
+  b.className = 'pill' + (k === 'reikai' ? ' kari' : ''); b.style.setProperty('--c', `var(--${k})`);
+  b.setAttribute('aria-pressed', String(on[k])); b.innerHTML = `<i></i>${label}`;
+  b.onclick = () => { on[k] = !on[k]; b.setAttribute('aria-pressed', String(on[k])); saveFilters(); render(); };
+  filters.appendChild(b);
 });
-const months=document.getElementById('months');
-for(let m=1;m<=12;m++){
-  const first=new Date(2027,m-1,1), last=new Date(2027,m,0).getDate();
-  const sec=document.createElement('section'); sec.className='month';
-  const cnt=EV.filter(e=>e.d.startsWith(`2027-${String(m).padStart(2,'0')}`)&&e.c!=='holiday'&&e.c!=='jotei').length;
-  sec.innerHTML=`<h2><b>${m}月</b><span>${cnt}件</span></h2>`;
-  const g=document.createElement('div'); g.className='grid';
-  DOW.forEach(d=>{const x=document.createElement('div');x.className='dow';x.textContent=d;g.appendChild(x)});
-  for(let i=0;i<first.getDay();i++){const x=document.createElement('div');x.className='day empty';g.appendChild(x)}
-  const listRows=[];
-  for(let d=1;d<=last;d++){
-    const key=`2027-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const dow=new Date(2027,m-1,d).getDay();
-    const evs=byDay[key]||[];
-    const hol=evs.find(e=>e.c==='holiday');
-    const cell=document.createElement('div'); cell.className='day'+(dow===0?' sun':dow===6?' sat':'')+(hol?' hol':'');
-    cell.innerHTML=`<div class="n">${d}</div>`;
-    evs.forEach(e=>{
-      if(e.c==='holiday'){cell.title=e.t;return}
-      const c=document.createElement('span'); c.dataset.c=e.c;
-      c.className='chip'+(e.c==='jotei'?' dot':(e.c==='honkai'||e.c==='block'||e.c==='yoteisha')?' line':'')+(e.k?' kento':'')+(e.c==='reikai'?' line kari':'');
-      c.style.setProperty('--c',`var(--${e.c})`); c.textContent=e.t.replace(/（.*?）/,''); c.title=e.t+(e.n?' — '+e.n:'');
-      cell.appendChild(c);
-      if(e.c!=='jotei') listRows.push({d,dow,e});
+
+/* view switching */
+document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { state.view = b.dataset.view; state.sel = null; render(); });
+document.getElementById('prev').onclick = () => { if (state.m > 1) { state.m--; state.sel = null; render(); } };
+document.getElementById('next').onclick = () => { if (state.m < 12) { state.m++; state.sel = null; render(); } };
+document.addEventListener('keydown', ev => {
+  if (state.view !== 'month' || sheetOpen) return;
+  if (ev.key === 'ArrowLeft') document.getElementById('prev').click();
+  if (ev.key === 'ArrowRight') document.getElementById('next').click();
+});
+
+function syncBar() { document.documentElement.style.setProperty('--barh', document.querySelector('.bar').offsetHeight + 'px'); }
+window.addEventListener('resize', syncBar);
+function render() {
+  syncBar();
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === state.view)));
+  ['year','month','list'].forEach(v => document.getElementById('view-' + v).classList.toggle('hide', v !== state.view));
+  document.getElementById('nav').classList.toggle('hide', state.view !== 'month');
+  history.replaceState(null, '', '#' + (state.view === 'month' ? 'm' + state.m : state.view));
+  if (state.view === 'month') renderMonth();
+  if (state.view === 'year') renderYear();
+  if (state.view === 'list') renderList();
+}
+
+function renderMonth() {
+  const m = state.m;
+  document.getElementById('prev').disabled = m === 1; document.getElementById('next').disabled = m === 12;
+  const cnt = EV.filter(e => e.d.startsWith(iso(m,1).slice(0,8)) && visible(e) && e.c !== 'holiday' && e.c !== 'jotei').length;
+  document.getElementById('cur').innerHTML = `${m}月<small>${cnt}件</small>`;
+  const g = document.getElementById('mgrid'); g.innerHTML = '';
+  const first = new Date(Y, m-1, 1).getDay(), last = new Date(Y, m, 0).getDate();
+  for (let i = 0; i < first; i++) { const x = document.createElement('div'); x.className = 'cell empty'; g.appendChild(x); }
+  for (let d = 1; d <= last; d++) {
+    const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+    const evs = (byDay[key] || []).filter(visible);
+    const hol = evs.find(e => e.c === 'holiday');
+    const cell = document.createElement('button'); cell.className = 'cell' + dayClass(dow, key) + (state.sel === key ? ' sel' : '');
+    cell.setAttribute('aria-label', `${m}月${d}日${DOW[dow]}曜日`);
+    cell.innerHTML = `<span class="num">${d}</span>` + (hol ? `<span class="holname">${hol.t}</span>` : '');
+    const dots = document.createElement('span'); dots.className = 'dots';
+    evs.filter(e => e.c !== 'holiday').forEach(e => {
+      const b = document.createElement('span');
+      b.className = 'ebar ' + e.c + (e.s === 'kari' ? ' kari' : '') + (e.s === 'kento' ? ' kento' : '');
+      b.style.setProperty('--c', `var(--${e.c})`); b.textContent = short(e.t); b.title = e.t; cell.appendChild(b);
+      const i = document.createElement('i'); i.className = (e.s === 'kari' ? 'kari ' : '') + (e.s === 'kento' ? 'kento ' : '') + e.c; i.style.setProperty('--c', `var(--${e.c})`); dots.appendChild(i);
     });
-    if(hol){const h=document.createElement('span');h.dataset.c='holiday';h.className='chip';h.style.cssText='background:transparent;color:var(--sun);font-weight:400';h.textContent=hol.t;cell.appendChild(h)}
+    cell.appendChild(dots);
+    cell.onclick = () => { state.sel = state.sel === key ? null : key; renderMonth(); if (state.sel) scrollAgenda(key); };
     g.appendChild(cell);
   }
-  sec.appendChild(g);
-  const list=document.createElement('div'); list.className='list';
-  listRows.forEach(({d,dow,e})=>{
-    const r=document.createElement('div'); r.className='row'; r.dataset.c=e.c;
-    r.innerHTML=`<span class="d ${dow===0?'sun':dow===6?'sat':''}">${m}/${d}(${DOW[dow]})</span><span class="t ${e.c==='reikai'?'kari':''}" style="--c:var(--${e.c})">${e.t}${e.k?'<span class="tag kento">検討</span>':''}${e.c==='reikai'?'<span class="tag kari">仮</span>':''}</span>`;
-    list.appendChild(r);
-  });
-  sec.appendChild(list);
-  months.appendChild(sec);
+  const ag = document.getElementById('agenda'); ag.innerHTML = '';
+  let any = false;
+  for (let d = 1; d <= last; d++) {
+    const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+    const evs = (byDay[key] || []).filter(visible);
+    if (!evs.length) continue; any = true;
+    ag.appendChild(agendaRow(key, d, dow, evs, `${DOW[dow]}`));
+  }
+  if (!any) ag.innerHTML = '<div class="empty-msg">この月に表示する予定はありません（種別の絞り込みを確認）</div>';
 }
+function agendaRow(key, d, dow, evs, label) {
+  const row = document.createElement('div'); row.className = 'arow' + (state.sel === key ? ' sel' : ''); row.dataset.key = key;
+  row.innerHTML = `<div class="date${dayClass(dow, key)}"><b>${d}</b><span>${label}</span></div>`;
+  const items = document.createElement('div'); items.className = 'items';
+  evs.forEach(e => items.appendChild(eventItem(e)));
+  row.appendChild(items); return row;
+}
+function eventItem(e) {
+  const b = document.createElement('button'); b.className = 'eitem'; b.style.setProperty('--c', `var(--${e.c})`);
+  const dim = e.c === 'jotei' || e.c === 'yoteisha' ? ' dim' : e.c === 'holiday' ? ' holi' : '';
+  b.innerHTML = `<span class="sw ${e.c}${e.s === 'kari' ? ' kari' : ''}"></span><span class="tx${dim}">${e.t}</span>` +
+    (e.s ? `<span class="badge ${e.s}">${stName[e.s]}</span>` : '') + (e.c !== 'holiday' ? '<span class="chev">›</span>' : '');
+  if (e.c !== 'holiday') b.onclick = () => openSheet(e); else b.disabled = true;
+  return b;
+}
+function scrollAgenda(key) {
+  const r = document.querySelector(`.arow[data-key="${key}"]`);
+  if (r) r.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+}
+
+function renderYear() {
+  const g = document.getElementById('ygrid'); g.innerHTML = '';
+  for (let m = 1; m <= 12; m++) {
+    const first = new Date(Y, m-1, 1).getDay(), last = new Date(Y, m, 0).getDate();
+    const mev = EV.filter(e => e.d.startsWith(iso(m,1).slice(0,8)) && visible(e));
+    const cnt = mev.filter(e => e.c !== 'holiday' && e.c !== 'jotei').length;
+    const card = document.createElement('button'); card.className = 'card ym'; card.setAttribute('aria-label', `${m}月を開く`);
+    card.innerHTML = `<h3>${m}月<small>${cnt}件</small></h3>`;
+    const gr = document.createElement('div'); gr.className = 'g';
+    DOW.forEach(d => { const x = document.createElement('span'); x.className = 'dh'; x.textContent = d; gr.appendChild(x); });
+    for (let i = 0; i < first; i++) gr.appendChild(document.createElement('span'));
+    for (let d = 1; d <= last; d++) {
+      const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+      const x = document.createElement('span'); x.className = 'd' + dayClass(dow, key);
+      x.innerHTML = `<span>${d}</span>`;
+      const dd = document.createElement('span'); dd.className = 'dd';
+      (byDay[key] || []).filter(visible).filter(e => e.c !== 'holiday' && e.c !== 'jotei').slice(0,3).forEach(e => {
+        const i = document.createElement('i'); i.className = e.s === 'kari' ? 'kari' : ''; i.style.setProperty('--c', `var(--${e.c})`); dd.appendChild(i);
+      });
+      x.appendChild(dd); gr.appendChild(x);
+    }
+    card.appendChild(gr);
+    const hl = document.createElement('div'); hl.className = 'hl';
+    const seen = new Set();
+    mev.filter(e => ['honkai','block','reikai'].includes(e.c) || e.s === 'kento').forEach(e => {
+      const k = short(e.t); if (seen.has(k)) return; seen.add(k);
+      const s = document.createElement('span'); s.className = e.s === 'kento' ? 'kento' : ''; s.style.setProperty('--c', `var(--${e.c})`);
+      const dd = +e.d.slice(8);
+      s.innerHTML = `${dd}日 <b>${k}${e.s === 'kento' ? '（検討中）' : e.s === 'kari' ? '（仮）' : ''}</b>`; hl.appendChild(s);
+    });
+    if (hl.children.length) card.appendChild(hl);
+    card.onclick = () => { state.view = 'month'; state.m = m; state.sel = null; render(); window.scrollTo({ top: 0 }); };
+    g.appendChild(card);
+  }
+}
+
+function renderList() {
+  const L = document.getElementById('lst'); L.innerHTML = '';
+  for (let m = 1; m <= 12; m++) {
+    const last = new Date(Y, m, 0).getDate();
+    const wrap = document.createElement('div'); wrap.className = 'lmonth';
+    const card = document.createElement('div'); card.className = 'card';
+    let cnt = 0;
+    for (let d = 1; d <= last; d++) {
+      const key = iso(m, d), dow = new Date(Y, m-1, d).getDay();
+      const evs = (byDay[key] || []).filter(visible);
+      if (!evs.length) continue;
+      cnt += evs.filter(e => e.c !== 'holiday' && e.c !== 'jotei').length;
+      card.appendChild(agendaRow(key, d, dow, evs, `${m}/${d} ${DOW[dow]}`));
+    }
+    wrap.innerHTML = `<h3>${m}月<small>${cnt}件</small></h3>`;
+    if (!card.children.length) card.innerHTML = '<div class="empty-msg">表示する予定はありません</div>';
+    wrap.appendChild(card); L.appendChild(wrap);
+  }
+}
+
+/* sheet */
+let sheetOpen = false;
+const sheet = document.getElementById('sheet'), scrim = document.getElementById('scrim');
+function openSheet(e) {
+  const dt = new Date(e.d), dow = DOW[dt.getDay()];
+  sheet.style.setProperty('--c', `var(--${e.c})`);
+  document.querySelector('#sh-cat span').textContent = catLabel(e.c);
+  document.getElementById('sh-title').textContent = e.t;
+  document.getElementById('sh-when').textContent = `${Y}年${dt.getMonth()+1}月${dt.getDate()}日（${dow}）`;
+  document.getElementById('sh-st').innerHTML = e.s ? `<span class="badge ${e.s}">${stName[e.s]}</span>` : '';
+  document.getElementById('sh-memo').textContent = e.n || '';
+  sheet.classList.add('on'); scrim.classList.add('on'); sheetOpen = true;
+  document.getElementById('sh-close').focus();
+}
+function closeSheet() { sheet.classList.remove('on'); scrim.classList.remove('on'); sheetOpen = false; }
+scrim.onclick = closeSheet; document.getElementById('sh-close').onclick = closeSheet;
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && sheetOpen) closeSheet(); });
+let ty = null;
+sheet.addEventListener('touchstart', ev => { ty = ev.touches[0].clientY; }, { passive: true });
+sheet.addEventListener('touchend', ev => { if (ty !== null && ev.changedTouches[0].clientY - ty > 60) closeSheet(); ty = null; }, { passive: true });
+
+window.addEventListener('hashchange', () => {
+  const h = location.hash.replace('#', '');
+  if (h === 'year' || h === 'list') { if (state.view !== h) { state.view = h; state.sel = null; render(); } return; }
+  const mm = h.match(/^m(\d{1,2})$/);
+  if (mm && (state.view !== 'month' || state.m !== +mm[1])) { state.view = 'month'; state.m = Math.min(12, Math.max(1, +mm[1])); state.sel = null; if (sheetOpen) closeSheet(); render(); }
+});
+render();
 </script>
 </body>
 </html>
