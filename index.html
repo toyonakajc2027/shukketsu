@@ -462,6 +462,7 @@
       (S.me ? '<a href="#" data-go="person">' + esc(S.me.replace(/ /g, '')) + ' さんの出席記録</a>' : '') +
       '<a href="#" data-go="admin">' + (S.role === 'admin' ? '役員メニュー' : '予定の登録・リマインド') + '</a>' +
       '<a href="#" id="myLink">自分専用リンク</a>' +
+      (HAS_GAS ? '' : '<a href="/">ホーム</a>') +   // 静的配信(GitHub Pages)のときだけ、入口(ホーム)へ戻る道を出す
       '<a href="#" id="logout" style="color:var(--hint)">ログアウト</a>' +
       '</div></div>';
     app.innerHTML = h;
