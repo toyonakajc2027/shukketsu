@@ -57,6 +57,7 @@
 
   /* ── 文字階層 ── */
   .eyebrow { font-size: 12px; font-weight: 500; color: var(--sub); letter-spacing: .04em; }
+  a.eyebrow { display: inline-block; color: var(--sub); padding: 6px 0 2px; margin-top: -6px; }   /* 団体名はホーム(/)へ戻るリンク。静的配信のときだけ a になる */
   h1.title { font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin: 4px 0 0; }
   h2.section { font-size: 13px; font-weight: 600; color: var(--sub); margin: 28px 0 8px; letter-spacing: .02em; }
   h3.ev-title { font-size: 22px; font-weight: 700; letter-spacing: -.015em; line-height: 1.25; margin: 2px 0 0; }
@@ -375,7 +376,7 @@
   function viewGate() {
     app.innerHTML =
       '<div class="screen gate">' +
-      '<div class="eyebrow">豊中青年会議所</div><h1 class="title">出欠</h1>' +
+      orgLabel() + '<h1 class="title">出欠</h1>' +
       '<p>LINEで案内している合言葉を入れてください。この端末には記憶されるので、次回からは不要です。</p>' +
       '<input class="input" id="pass" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="合言葉">' +
       '<div class="err" id="gateErr"></div>' +
@@ -483,9 +484,12 @@
     };
   }
 
+  function orgLabel() {   // 左上の団体名。GitHub Pages 配信のときはホーム(/)へのリンク
+    return HAS_GAS ? '<div class="eyebrow">豊中青年会議所</div>' : '<a class="eyebrow" href="/">豊中青年会議所</a>';
+  }
   function topBar() {
     var name = S.me ? S.me.replace(/ /g, '') : '';
-    return '<div class="top"><div><div class="eyebrow">豊中青年会議所</div><h1 class="title">出欠</h1></div>' +
+    return '<div class="top"><div>' + orgLabel() + '<h1 class="title">出欠</h1></div>' +
       '<div class="who">' + (name ? '<b>' + esc(name) + '</b><a href="#" data-go="pick">名前を変える</a>' : '') + '</div></div>';
   }
 
